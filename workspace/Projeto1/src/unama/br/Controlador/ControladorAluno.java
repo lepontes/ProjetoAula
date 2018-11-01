@@ -32,9 +32,30 @@ public class ControladorAluno extends HttpServlet {
 
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = request.getParameter("acao");
+		
+		if(acao == null) {
+			consultarAluno(request, response);
+		} else if (acao.equals("cadastrar")) {
+			cadastrarAluno(request, response);
+		}
+		
+}
+
+
+	private void consultarAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Aluno> alunos = alunoDAO.consultaAlunos();
 		request.setAttribute("LISTA-ALUNOS", alunos);
 		request.getRequestDispatcher("/ListaAlunosVisao.jsp").forward(request, response);
+	}
+
+
+	private void cadastrarAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String primeiroNome = request.getParameter("pnome");
+		String ultimoNome = request.getParameter("unome");
+		String email = request.getParameter("email");
+	    Aluno aluno = new Aluno(primeiroNome, ultimoNome, email);
+	    alunoDAO.cadastrarAluno(aluno);
 	}
 
 }

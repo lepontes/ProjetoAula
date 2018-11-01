@@ -1,5 +1,3 @@
-<%@page import="unama.br.Modelo.Aluno"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,30 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="ControladorAluno" method="post">
+ <p>Primeiro nome: <input type="text" name="pnome" placeholder="Primeiro Nome"></p><br></br>
+ <p>Ultimo nome: <input type="text" name="unome" placeholder="Ultimo Nome"></p><br></br>
+ <p>Email: <input type="text" name="email" placeholder="Email"></p><br></br>
+ <input type="submit" name="cadastrar" value="Cadastrar">
+ <input type="hidden" name="acao" value="cadastrar">
+</form>
 
-<a href="CadastroAluno.jsp" class="btn btn-primary">Cadastrar aluno</a>
-
-<% List<Aluno> alunos = (List<Aluno>) request.getAttribute("LISTA-ALUNOS");%>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% for(Aluno aluno : alunos){ %>
-    <tr>
-      <th scope="row">1</th>
-      <td><%=aluno.getPrimeiroNome() %></td>
-      <td><%=aluno.getUltimoNome() %></td>
-      <td><%=aluno.getEmail()%></td>
-    </tr>
-    <%} %>  
-  </tbody>
-</table>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package br.unama.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,4 +69,21 @@ public class AlunoDAO {
 		
 		return listaAlunos;
 	}
+	
+	public void cadastrarAluno(Aluno aluno) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.datasource.getConnection();
+			String sql = "insert into aluno (primeiro_nome, ultimo_nome, email) values (?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1,  aluno.getPrimeiroNome());
+			ps.setString(2,  aluno.getUltimoNome());
+			ps.setString(3, aluno.getEmail());
+			ps.execute();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
